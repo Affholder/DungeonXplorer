@@ -6,6 +6,6 @@
     <title>DungeonXplorer</title>
 </head>
 <body>
-    <h1>Bienvenu sur DungeonXplorer !</h1>
+    <h1>erreur 404 cette page n'existe pas</h1>
 </body>
 </html>
