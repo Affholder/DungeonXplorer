@@ -2,8 +2,8 @@
 // autoload.php
 spl_autoload_register(function ($class) {
     $directories = array(
-        'models/',
-        'controllers/'
+        'app/models/',
+        'app/controllers/'
     );
 
     foreach ($directories as $directory) {
