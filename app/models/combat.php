@@ -1,6 +1,6 @@
 <?php
 //toutes les regles de base de calcul des combats.
-class CombatManager{
+class Combat{
 
     public function calculateInitiative($combatant) {
         return rand(1, 6) + $combatant->initiative;

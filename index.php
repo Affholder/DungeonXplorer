@@ -1,5 +1,4 @@
 <?php 
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -69,16 +68,42 @@ class Router
     }
 }
 
+
+
 // Instanciation du routeur
-$router = new Router('DungeonXplorer');
+$router = new Router("DungeonXplorer");
 
 // Ajout des routes
-$router->addRoute('', 'HomeController@index'); // Pour la racine
+// Pour la racine
+$router->addRoute('', 'HomeController@index'); 
 
 $router->addRoute('home', 'HomeController@index');
 
+// Connexion et inscription
+
+$router->addRoute('connexion', 'HomeController@connexion');
+$router->addRoute('inscription', 'HomeController@inscription');
+$router->addRoute('deconnexion', 'HomeController@deconnexion');
+
+//creation personnage
+
+$router->addRoute('newgame', 'HeroController@index');
+$router->addRoute('creationperso', 'HeroController@create');
+
+
+//affichage chapitre
+
+$router->addRoute('chapitre/{id}', 'ChapterController@show');
+
 
 $router->addRoute('about', 'AboutController@index'); // Pour la page "about"
+
+// Gestion des POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['route'])) {
+    //echo "Route POST demandée : " . $_POST['route'] . "<br>";
+    $router->route($_POST['route']);
+    exit;
+}
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
