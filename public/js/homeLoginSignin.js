@@ -1,4 +1,4 @@
-
+console.log("homeLoginSignin.js chargé");
 
 function openLogInPopUp() {
     document.getElementById("login-popup").style.display = "flex";
