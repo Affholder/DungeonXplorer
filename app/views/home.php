@@ -1,10 +1,10 @@
 <?php
 session_start();
 
+require_once("header.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="public/css/home.css">
