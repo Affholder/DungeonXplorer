@@ -1,0 +1,101 @@
+
+body { 
+    background-color: #1A1A1A; 
+    color: #E5E5E5; 
+    font-family: 'Roboto', sans-serif; 
+    text-align: center; 
+    margin: 0;
+    padding: 20px;
+}
+h1 { 
+    font-family: 'Pirata One', cursive; 
+    color: #C4975E; 
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+p.subtitle {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.card-container { 
+    display: flex; 
+    justify-content: center; 
+    gap: 30px; 
+    flex-wrap: wrap; 
+}
+
+.card { 
+    background-color: #2E2E2E; 
+    border: 2px solid #4A7A66; 
+    border-radius: 10px; 
+    padding: 20px; 
+    width: 300px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #C4975E;
+}
+
+/* Style pour l'image de classe */
+.class-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+}
+
+.card h2 {
+    font-family: 'Pirata One', cursive;
+    color: #C4975E;
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+.stats {
+    text-align: left;
+    background: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 5px;
+    list-style: none;
+    padding-left: 10px;
+    width: 90%;
+    margin-bottom: 15px;
+}
+.stats li { margin: 5px 0; }
+
+input[type="text"] { 
+    width: 80%;
+    padding: 10px; 
+    margin-bottom: 10px;
+    border-radius: 5px; 
+    border: 1px solid #C4975E; 
+    background: #1A1A1A; 
+    color: white; 
+    text-align: center;
+}
+
+button.btn { 
+    width: 100%;
+    background-color: #C4975E; 
+    color: #1A1A1A; 
+    padding: 12px; 
+    border: none; 
+    font-family: 'Pirata One'; 
+    font-size: 1.4em; 
+    cursor: pointer; 
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+button.btn:hover { 
+    background-color: #8B1E1E; 
+    color: white; 
+}
+.error-msg { color: #ff6b6b; font-weight: bold; margin-bottom: 20px; }
