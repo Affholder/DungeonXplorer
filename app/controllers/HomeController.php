@@ -12,6 +12,13 @@ class HomeController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST["email"])) {
                 $email = strip_tags($_POST["email"]);
+                require_once __DIR__ . '/../../config/con_db.php';
+                $req = $db->prepare("SELECT count(*) as total FROM Game_User WHERE email = ?");
+                $req->execute([$email]);
+                $res = $req->fetch();
+                if ($res['total'] > 0) {
+                    $error = "Un compte est déja associé à cet email.";
+                }
             } else {
                 $error = "Email manquant.";
             }
