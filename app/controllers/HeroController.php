@@ -40,15 +40,25 @@ class HeroController {
             }
 
             try {
-                // a) Récupérer les stats de la classe choisie
+                //Récupérer les stats de la classe choisie
                 $stmt = $db->prepare("SELECT * FROM Class WHERE id = :id");
                 $stmt->execute(['id' => $classId]);
                 $classStats = $stmt->fetch(PDO::FETCH_ASSOC);
 
+                //Récuperer l'id de l'utilisateur
+                if (isset($_SESSION['user_id'])){
+                    $user_id = $_SESSION['user_id'];
+                }
+                else{
+                    $_SESSION['error'] = "Erreur : l'utilisateur n'est pas connecté.";
+                    header('Location: /DungeonXplorer');
+                    exit();
+                }
+
                 if ($classStats) {
-                    // b) Insérer le héros
-                    $sql = "INSERT INTO Hero (name, class_id, pv, mana, strength, initiative, xp) 
-                            VALUES (:name, :cid, :pv, :mana, :str, :init, 0)";
+                    //Insérer le héros
+                    $sql = "INSERT INTO Hero (name, class_id, pv, pv_max, mana, mana_max, strength, initiative, xp, user_id) 
+                            VALUES (:name, :cid, :pv, :pv, :mana, :mana, :str, :init, 0, :userid)";
                     
                     $insert = $db->prepare($sql);
                     $insert->execute([
@@ -57,13 +67,14 @@ class HeroController {
                         'pv'   => $classStats['base_pv'],
                         'mana' => $classStats['base_mana'],
                         'str'  => $classStats['strength'],
-                        'init' => $classStats['initiative']
+                        'init' => $classStats['initiative'],
+                        'userid' => $user_id
                     ]);
 
-                    // c) Sauvegarder l'ID et REDIRIGER VERS LE JEU
+                    //REDIRIGER VERS LE JEU
                     //$_SESSION['hero_id'] = $db->lastInsertId();
 
-                    // C'EST LA LIGNE CRITIQUE : Redirection vers le Chapitre 1
+                    //Redirection vers le Chapitre 1
                     header('Location: /DungeonXplorer/chapitre/1');
                     exit();
                 }
