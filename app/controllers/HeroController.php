@@ -71,9 +71,8 @@ class HeroController {
                         'userid' => $user_id
                     ]);
 
-                    //REDIRIGER VERS LE JEU
-                    //$_SESSION['hero_id'] = $db->lastInsertId();
-
+                    //enregistrer id de l'heros et REDIRIGER VERS LE JEU 
+                    $_SESSION['current_hero_id'] = intval($db->lastInsertId());
                     //Redirection vers le Chapitre 1
                     header('Location: /DungeonXplorer/chapitre/1');
                     exit();

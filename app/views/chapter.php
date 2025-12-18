@@ -37,7 +37,7 @@
 
         <?php if (empty($choices)): ?>
             <p style="font-style:italic; color:#888;">L'aventure se termine ici...</p>
-            <a href="DungeonXplorer/" class="choice-btn">Retourner à l'accueil</a>
+            <a href="/DungeonXplorer/" class="choice-btn">Retourner à l'accueil</a>
         <?php else: ?>
             <h3 style="font-family:'Pirata One'; color:#C4975E; font-size:2em;">Que faites-vous ?</h3>
             <?php foreach ($choices as $choice):?>
