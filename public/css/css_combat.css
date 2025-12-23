@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Roboto&display=swap');
+
+/* --- STYLE GÉNÉRAL --- */
+body {
+    background-color: #1A1A1A;
+    color: #E5E5E5;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Image de fond sombre pour l'ambiance */
+    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('../images/fond.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h1 {
+    font-family: 'Pirata One', cursive;
+    color: #C4975E;
+    font-size: 4em;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+    letter-spacing: 3px;
+}
+
+/* --- DISPOSITION DE L'ARÈNE (GAUCHE VS DROITE) --- */
+.arena {
+    display: flex;
+    justify-content: center; /* Centre le bloc global */
+    align-items: flex-end; /* Aligne les cartes vers le bas */
+    gap: 80px; /* Grand espace entre Héros et Monstre */
+    width: 100%;
+    max-width: 1200px; /* Plus large pour bien séparer */
+    margin-bottom: 40px;
+    position: relative;
+    flex-wrap: wrap; 
+}
+
+/* --- CARTE PERSONNAGE --- */
+.card {
+    background: linear-gradient(145deg, #2a1f1a 0%, #1f1612 100%);
+    border: 3px solid #8b6914;
+    border-radius: 8px;
+    padding: 20px;
+    width: 320px; /* Carte un peu plus large */
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.8),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+/* IMPORTANT : Force le Héros à GAUCHE et le Monstre à DROITE */
+.hero-card {
+    order: 1;
+    border-color: #2ecc71; /* Bordure verte subtile pour le héros */
+}
+
+.monster-card {
+    order: 2;
+    border-color: #c0392b; /* Bordure rouge subtile pour le monstre */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+}
+
+.card h2 {
+    font-family: 'Pirata One', cursive;
+    color: #ffd700;
+    font-size: 2.2em;
+    margin: 10px 0 15px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* --- IMAGES DES PERSONNAGES --- */
+.char-image-container {
+    width: 100%;
+    height: 250px; /* Plus grand pour mieux voir les sprites */
+    border: 2px solid #5a4a42;
+    border-radius: 5px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+    box-shadow: inset 0 0 20px rgba(0,0,0,1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.char-img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.8));
+    transition: filter 0.3s;
+}
+
+/* Animation de dégâts (secousse) */
+.shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* --- BOITE DE STATS --- */
+.stats-box {
+    width: 100%;
+    margin-top: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* BARRES DE VIE ET MANA */
+.bar-container {
+    background: #000;
+    height: 22px; /* Un peu plus épais */
+    border-radius: 11px;
+    margin: 8px 0 15px 0;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #444;
+    box-shadow: inset 0 0 5px rgba(0,0,0,1);
+}
+
+.bar-fill {
+    height: 100%;
+    width: 100%;
+    transition: width 0.4s ease-out;
+    border-right: 1px solid rgba(255,255,255,0.4);
+}
+
+.hp-fill {
+    background: linear-gradient(90deg, #c0392b 0%, #e74c3c 100%);
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+}
+
+.mana-fill {
+    background: linear-gradient(90deg, #2980b9 0%, #3498db 100%);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+}
+
+.bar-text {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    line-height: 22px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000, 0 0 3px #000;
+    text-align: center;
+    z-index: 2;
+}
+
+/* --- LOGS DE COMBAT --- */
+.log-container {
+    width: 90%;
+    max-width: 800px;
+    height: 150px;
+    background-color: rgba(30, 30, 30, 0.9);
+    border: 2px solid #C4975E;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 0 auto 30px auto; /* Centré */
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    text-align: left;
+    font-family: 'Roboto', monospace;
+    font-size: 0.95em;
+}
+
+.log-entry {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.log-info { color: #f1c40f; }
+.log-dmg { color: #e74c3c; font-weight: bold; }
+.log-heal { color: #2ecc71; font-weight: bold; }
+.log-magic { color: #3498db; font-style: italic; }
+
+/* --- CONTROLES / BOUTONS --- */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background: linear-gradient(180deg, #8b6914 0%, #5e460e 100%);
+    color: #ffd700;
+    font-family: 'Pirata One', cursive;
+    font-size: 1.6em;
+    padding: 10px 30px;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 0 #3e2e09, 0 5px 10px rgba(0,0,0,0.5);
+    min-width: 150px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.btn:hover:not(:disabled) {
+    background: linear-gradient(180deg, #d4af37 0%, #8b6914 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #3e2e09, 0 10px 20px rgba(212, 175, 55, 0.2);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #3e2e09;
+}
+
+.btn:disabled {
+    background: #333;
+    border-color: #555;
+    color: #777;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-potion {
+    background: linear-gradient(180deg, #27ae60 0%, #145a32 100%);
+    border-color: #2ecc71;
+    color: #dfffe0;
+    box-shadow: 0 4px 0 #0e3e23, 0 5px 10px rgba(0,0,0,0.5);
+}
+.btn-potion:hover:not(:disabled) {
+    background: linear-gradient(180deg, #2ecc71 0%, #27ae60 100%);
+    box-shadow: 0 6px 0 #0e3e23, 0 0 15px #2ecc71;
+}
+
+/* --- TEXTE FLOTTANT DE DÉGÂTS --- */
+.floating-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Pirata One', cursive;
+    font-size: 3.5em; /* Plus gros */
+    font-weight: bold;
+    text-shadow: 3px 3px 0 #000; /* Contour noir plus épais */
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 900px) {
+    .arena {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    /* Sur mobile, on remet le monstre en haut (optionnel, sinon laisse l'ordre tel quel) */
+    .hero-card { order: 2; }
+    .monster-card { order: 1; }
+    
+    .card {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    h1 { font-size: 2.5em; }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .btn { width: 90%; }
+}

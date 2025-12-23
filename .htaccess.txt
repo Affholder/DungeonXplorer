@@ -1,3 +1,0 @@
-RewriteEngine On
-RewriteBase /DungeonXplorer/
-RewriteRule ^(.*)$ index.php [QSA,L]
