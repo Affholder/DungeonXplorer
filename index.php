@@ -77,11 +77,15 @@ class Router
     }
 }
 
-// --- CONFIGURATION ---
-$router = new Router();
 
-// Routes principales
+
+// Instanciation du routeur
+$router = new Router("DungeonXplorer");
+
+// Ajout des routes
+// Pour la racine
 $router->addRoute('', 'HomeController@index'); 
+
 $router->addRoute('home', 'HomeController@index');
 $router->addRoute('connexion', 'HomeController@connexion');
 $router->addRoute('inscription', 'HomeController@inscription');
@@ -108,11 +112,22 @@ $router->addRoute('admin/addChapter', 'AdminController@addChapter');
 $router->addRoute('admin/updateChapter', 'AdminController@updateChapter');
 $router->addRoute('admin/deleteChapter', 'AdminController@deleteChapter');
 
-// Monstres
-$router->addRoute('admin/getMonsters', 'AdminController@getMonsters');
-$router->addRoute('admin/addMonster', 'AdminController@addMonster');
-$router->addRoute('admin/updateMonster', 'AdminController@updateMonster');
-$router->addRoute('admin/deleteMonster', 'AdminController@deleteMonster');
+// Connexion et inscription
+
+$router->addRoute('connexion', 'HomeController@connexion');
+$router->addRoute('inscription', 'HomeController@inscription');
+$router->addRoute('deconnexion', 'HomeController@deconnexion');
+
+//creation personnage
+
+$router->addRoute('newgame', 'HeroController@index');
+$router->addRoute('creationperso', 'HeroController@create');
+
+
+//affichage chapitre
+
+$router->addRoute('chapitre/{id}', 'ChapterController@show');
+
 
 // Trésors
 $router->addRoute('admin/getTreasures', 'AdminController@getTreasures');
@@ -120,9 +135,15 @@ $router->addRoute('admin/addTreasure', 'AdminController@addTreasure');
 $router->addRoute('admin/updateTreasure', 'AdminController@updateTreasure');
 $router->addRoute('admin/deleteTreasure', 'AdminController@deleteTreasure');
 
-// Utilisateurs
-$router->addRoute('admin/getUsers', 'AdminController@getUsers');
-$router->addRoute('admin/deleteUser', 'AdminController@deleteUser');
+// Gestion des POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['route'])) {
+    //echo "Route POST demandée : " . $_POST['route'] . "<br>";
+    $router->route($_POST['route']);
+    exit;
+}
+
+// Appel de la méthode route
+$router->route(trim($_SERVER['REQUEST_URI'], '/'));
 
 // Lancement
 $router->route();
