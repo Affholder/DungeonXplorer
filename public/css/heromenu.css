@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
+/* Conteneur de l'avatar du héros dans le header */
+.hero-avatar-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+/* Avatar du héros */
+.hero-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #d4af37;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 15px rgba(212, 175, 55, 0.4),
+        inset 0 0 10px rgba(0, 0, 0, 0.3);
+    filter: sepia(0.1) contrast(1.05);
+}
+
+.hero-avatar-container:hover .hero-avatar {
+    border-color: #ffd700;
+    transform: scale(1.08);
+    box-shadow: 
+        0 0 25px rgba(212, 175, 55, 0.6),
+        inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Nom du héros dans le header */
+.hero-avatar-name {
+    color: #d4af37;
+    font-weight: 600;
+    font-size: 0.95em;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.hero-avatar-container:hover .hero-avatar-name {
+    color: #ffd700;
+}
+
+/* Menu déroulant du héros */
+.hero-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    background: linear-gradient(145deg, #2a1f1a 0%, #1f1612 100%);
+    border: 3px solid #8b6914;
+    border-radius: 8px;
+    min-width: 240px;
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(212, 175, 55, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 1100;
+    overflow: hidden;
+}
+
+.hero-menu.active {
+    display: block;
+    animation: dropdownSlide 0.3s ease;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Flèche du menu */
+.hero-menu::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    right: 25px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #8b6914;
+}
+
+/* Informations du héros dans le menu */
+.hero-menu-info {
+    padding: 18px;
+    border-bottom: 2px solid #8b6914;
+    text-align: center;
+    background: linear-gradient(145deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+}
+
+.hero-menu-name {
+    color: #d4af37;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-family: 'Pirata One', cursive;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-menu-level {
+    color: #ffd700;
+    font-size: 1em;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Options du menu */
+.hero-menu-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-menu-option {
+    padding: 0;
+    margin: 0;
+}
+
+.hero-menu-option button {
+    width: 100%;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    color: #c9a961;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(139, 105, 20, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+}
+
+.hero-menu-option:last-child button {
+    border-bottom: none;
+}
+
+.hero-menu-option button:hover {
+    background: linear-gradient(90deg, rgba(139, 105, 20, 0.35) 0%, transparent 100%);
+    color: #ffd700;
+    padding-left: 28px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.hero-menu-option button:active {
+    background: rgba(139, 105, 20, 0.5);
+}
+
+/* Icônes des options */
+.hero-menu-option button::before {
+    content: '⚔️';
+    font-size: 1.3em;
+    display: inline-block;
+    width: 22px;
+    transition: transform 0.3s ease;
+}
+
+.hero-menu-option button:hover::before {
+    transform: scale(1.2);
+}
+
+.hero-menu-option button[onclick*="Profile"]::before,
+.hero-menu-option button[onclick*="profile"]::before {
+    content: '👤';
+}
+
+.hero-menu-option button[onclick*="Selection"]::before,
+.hero-menu-option button[onclick*="selection"]::before {
+    content: '🎭';
+}
+
+.hero-menu-option button[onclick*="logout"]::before,
+.hero-menu-option button[onclick*="Logout"]::before {
+    content: '🚪';
+}
+
+/* Boutons alternatifs (hero-menu-btn) */
+.hero-menu-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    color: #c9a961;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(139, 105, 20, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+}
+
+.hero-menu-btn:last-child {
+    border-bottom: none;
+}
+
+.hero-menu-btn:hover {
+    background: linear-gradient(90deg, rgba(139, 105, 20, 0.35) 0%, transparent 100%);
+    color: #ffd700;
+    padding-left: 28px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.hero-menu-btn .menu-icon {
+    font-size: 1.3em;
+    display: inline-block;
+    width: 22px;
+    transition: transform 0.3s ease;
+}
+
+.hero-menu-btn:hover .menu-icon {
+    transform: scale(1.2);
+}
+
+/* Responsive pour le menu héros */
+@media (max-width: 768px) {
+    .hero-avatar {
+        width: 45px;
+        height: 45px;
+        border-width: 2px;
+    }
+    
+    .hero-avatar-name {
+        display: none;
+    }
+    
+    .hero-menu {
+        min-width: 200px;
+        right: -10px;
+    }
+    
+    .hero-menu::before {
+        right: 20px;
+    }
+    
+    .hero-menu-info {
+        padding: 15px;
+    }
+    
+    .hero-menu-name {
+        font-size: 1.2em;
+    }
+    
+    .hero-menu-option button,
+    .hero-menu-btn {
+        padding: 12px 15px;
+        font-size: 0.95em;
+    }
+    
+    .hero-menu-option button:hover,
+    .hero-menu-btn:hover {
+        padding-left: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .hero-menu {
+        min-width: 180px;
+        right: -15px;
+    }
+    
+    .hero-menu-name {
+        font-size: 1.1em;
+    }
+    
+    .hero-menu-level {
+        font-size: 0.9em;
+    }
+    
+    .hero-menu-option button::before,
+    .hero-menu-btn .menu-icon {
+        font-size: 1.2em;
+        width: 20px;
+    }
+}
+
+/* Animation de pulsation pour l'avatar */
+@keyframes avatarPulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
+    }
+}
+
+.hero-avatar-container:hover .hero-avatar {
+    animation: avatarPulse 2s infinite;
+}
