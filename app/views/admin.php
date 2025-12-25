@@ -11,7 +11,7 @@ require_once("header.php");
 </head>
 <body>
     <div class="admin-container">
-        <h1>🛡️ Panneau d'Administration</h1>
+        <h1>Panneau d'Administration</h1>
         
         <!-- TABS DE NAVIGATION -->
         <div class="admin-tabs">

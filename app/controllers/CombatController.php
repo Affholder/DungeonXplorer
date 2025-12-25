@@ -13,12 +13,16 @@ class CombatController {
     public function index() {
         if (session_status() === PHP_SESSION_NONE) session_start();
         
+        // Inclure la connexion à la base de données
+        require __DIR__ . '/../../config/con_db.php';
+        
         if (!isset($_SESSION['current_hero_id'])) {
              header('Location: /DungeonXplorer');
              exit;
         }
         $_SESSION['hero_id'] = $_SESSION['current_hero_id']; 
 
+        // Récupérer les informations complètes du héros
         $currentHero = $this->model->getHero($_SESSION['hero_id']);
 
         require_once __DIR__ . '/../views/header.php';

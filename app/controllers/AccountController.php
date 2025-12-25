@@ -4,6 +4,7 @@ require_once __DIR__ . '/../models/user.php';
 class AccountController {
 
     public function index() {
+        require __DIR__ . '/../../config/con_db.php';
         require_once 'app/views/account.php';
     }
     

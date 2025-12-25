@@ -108,46 +108,6 @@ $router->addRoute('admin/addChapter', 'AdminController@addChapter');
 $router->addRoute('admin/updateChapter', 'AdminController@updateChapter');
 $router->addRoute('admin/deleteChapter', 'AdminController@deleteChapter');
 
-// Connexion et inscription
-
-$router->addRoute('connexion', 'HomeController@connexion');
-$router->addRoute('inscription', 'HomeController@inscription');
-$router->addRoute('deconnexion', 'HomeController@deconnexion');
-
-//creation personnage
-
-$router->addRoute('newgame', 'HeroController@index');
-$router->addRoute('creationperso', 'HeroController@create');
-
-
-//affichage chapitre
-
-$router->addRoute('chapitre/{id}', 'ChapterController@show');
-$router->addRoute('connexion', 'HomeController@connexion');
-$router->addRoute('inscription', 'HomeController@inscription');
-$router->addRoute('deconnexion', 'HomeController@deconnexion');
-$router->addRoute('newgame', 'HeroController@index');
-$router->addRoute('creationperso', 'HeroController@create');
-$router->addRoute('chapitre/{id}', 'ChapterController@show');
-$router->addRoute('load', 'ChapterController@load');
-$router->addRoute('account', 'AccountController@index');
-$router->addRoute('deleteAccount', 'AccountController@deleteAccount');
-
-// Routes combat
-$router->addRoute('combat', 'CombatController@index');
-$router->addRoute('combat/data', 'CombatController@getCombatData');
-$router->addRoute('combat/potion', 'CombatController@usePotion');
-$router->addRoute('combat/end', 'CombatController@endCombat');
-
-// === ROUTES ADMINISTRATION ===
-$router->addRoute('admin', 'AdminController@index');
-
-// Chapitres
-$router->addRoute('admin/getChapters', 'AdminController@getChapters');
-$router->addRoute('admin/addChapter', 'AdminController@addChapter');
-$router->addRoute('admin/updateChapter', 'AdminController@updateChapter');
-$router->addRoute('admin/deleteChapter', 'AdminController@deleteChapter');
-
 // Monstres
 $router->addRoute('admin/getMonsters', 'AdminController@getMonsters');
 $router->addRoute('admin/addMonster', 'AdminController@addMonster');
@@ -159,13 +119,6 @@ $router->addRoute('admin/getTreasures', 'AdminController@getTreasures');
 $router->addRoute('admin/addTreasure', 'AdminController@addTreasure');
 $router->addRoute('admin/updateTreasure', 'AdminController@updateTreasure');
 $router->addRoute('admin/deleteTreasure', 'AdminController@deleteTreasure');
-
-// Gestion des POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['route'])) {
-    //echo "Route POST demandée : " . $_POST['route'] . "<br>";
-    $router->route($_POST['route']);
-    exit;
-}
 
 // Utilisateurs
 $router->addRoute('admin/getUsers', 'AdminController@getUsers');

@@ -29,7 +29,14 @@
         <h2 id="hero-name">Héros</h2>
         
         <div id="hero-container" class="char-image-container" style="position: relative;">
-            <img id="hero-img" class="char-img" src="/DungeonXplorer/public/images/hero_back.png" alt="Héros" onerror="this.style.display='none'">
+            <?php
+            // Récupérer l'image du héros depuis la base de données
+            $heroImage = '/DungeonXplorer/public/images/hero_back.png'; // Image par défaut
+            if (isset($currentHero) && !empty($currentHero['image'])) {
+                $heroImage = htmlspecialchars($currentHero['image']);
+            }
+            ?>
+            <img id="hero-img" class="char-img" src="<?php echo $heroImage; ?>" alt="Héros" onerror="this.src='/DungeonXplorer/public/images/hero_back.png'">
         </div>
 
         <div class="stats-box">

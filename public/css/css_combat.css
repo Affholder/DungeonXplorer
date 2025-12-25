@@ -33,7 +33,7 @@ h1 {
 .arena {
     display: flex;
     justify-content: center; /* Centre le bloc global */
-    align-items: flex-end; /* Aligne les cartes vers le bas */
+    align-items: center; /* Aligne les cartes au centre verticalement */
     gap: 80px; /* Grand espace entre Héros et Monstre */
     width: 100%;
     max-width: 1200px; /* Plus large pour bien séparer */
@@ -62,7 +62,7 @@ h1 {
 /* IMPORTANT : Force le Héros à GAUCHE et le Monstre à DROITE */
 .hero-card {
     order: 1;
-    border-color: #2ecc71; /* Bordure verte subtile pour le héros */
+    border-color: #8b6914; /* Bordure dorée comme le monstre */
 }
 
 .monster-card {

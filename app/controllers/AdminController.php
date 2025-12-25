@@ -4,17 +4,24 @@ class AdminController {
     private $db;
     
     public function __construct() {
-        require_once __DIR__ . '/../../config/con_db.php';
-        $this->db = $db;
+        // Ne pas charger $db ici dans une variable locale
+        // Le laisser global pour que les vues puissent y accéder
     }
     
     // Vérifier si l'utilisateur est admin
     private function checkAdmin() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         if (!isset($_SESSION['user_id'])) {
             header('Location: /DungeonXplorer');
             exit();
         }
+        
+        // Charger $db globalement
+        require_once __DIR__ . '/../../config/con_db.php';
+        $this->db = $db;
         
         $stmt = $this->db->prepare("SELECT admin FROM Game_User WHERE User_ID = ?");
         $stmt->execute([$_SESSION['user_id']]);
@@ -29,6 +36,9 @@ class AdminController {
     // Afficher la page d'administration
     public function index() {
         $this->checkAdmin();
+        // Rendre $db accessible globalement pour la vue
+        global $db;
+        $db = $this->db;
         require_once 'app/views/admin.php';
     }
     
@@ -36,13 +46,16 @@ class AdminController {
     
     public function getChapters() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         $stmt = $this->db->query("SELECT * FROM Chapter ORDER BY id ASC");
         $chapters = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($chapters);
+        exit;
     }
     
     public function addChapter() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $content = $_POST['content'];
@@ -55,10 +68,12 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'ajout']);
             }
         }
+        exit;
     }
     
     public function updateChapter() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
@@ -72,10 +87,12 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de la modification']);
             }
         }
+        exit;
     }
     
     public function deleteChapter() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
@@ -87,19 +104,23 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
             }
         }
+        exit;
     }
     
     // === GESTION DES MONSTRES ===
     
     public function getMonsters() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         $stmt = $this->db->query("SELECT * FROM Monster ORDER BY id ASC");
         $monsters = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($monsters);
+        exit;
     }
     
     public function addMonster() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'];
@@ -118,10 +139,12 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'ajout']);
             }
         }
+        exit;
     }
     
     public function updateMonster() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
@@ -141,10 +164,12 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de la modification']);
             }
         }
+        exit;
     }
     
     public function deleteMonster() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
@@ -156,19 +181,23 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
             }
         }
+        exit;
     }
     
     // === GESTION DES TRÉSORS ===
     
     public function getTreasures() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         $stmt = $this->db->query("SELECT * FROM Chapter_Treasure ORDER BY chapter_id ASC");
         $treasures = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($treasures);
+        exit;
     }
     
     public function addTreasure() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $chapter_id = $_POST['chapter_id'];
@@ -182,10 +211,12 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'ajout']);
             }
         }
+        exit;
     }
     
     public function updateTreasure() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
@@ -200,10 +231,12 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de la modification']);
             }
         }
+        exit;
     }
     
     public function deleteTreasure() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
@@ -215,19 +248,23 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
             }
         }
+        exit;
     }
     
     // === GESTION DES UTILISATEURS ===
     
     public function getUsers() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         $stmt = $this->db->query("SELECT User_ID, username, email, admin FROM Game_User ORDER BY User_ID ASC");
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($users);
+        exit;
     }
     
     public function deleteUser() {
         $this->checkAdmin();
+        header('Content-Type: application/json');
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user_id = $_POST['user_id'];
@@ -235,7 +272,7 @@ class AdminController {
             // Empêcher la suppression de son propre compte
             if ($user_id == $_SESSION['user_id']) {
                 echo json_encode(['success' => false, 'message' => 'Vous ne pouvez pas supprimer votre propre compte']);
-                return;
+                exit;
             }
             
             $stmt = $this->db->prepare("DELETE FROM Game_User WHERE User_ID = ?");
@@ -245,6 +282,7 @@ class AdminController {
                 echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
             }
         }
+        exit;
     }
 }
 ?>
