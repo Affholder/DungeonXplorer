@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
+.heroes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    justify-items: center;
+}
+
+.hero-selection-card {
+    background: linear-gradient(145deg, #2a1f1a 0%, #1f1612 100%);
+    border: 3px solid #8b6914;
+    border-radius: 5px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+}
+
+.hero-selection-card::before,
+.hero-selection-card::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #d4af37;
+    transition: all 0.3s ease;
+}
+
+.hero-selection-card::before {
+    top: 8px;
+    left: 8px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.hero-selection-card::after {
+    bottom: 8px;
+    right: 8px;
+    border-left: none;
+    border-top: none;
+}
+
+.hero-selection-card:hover {
+    transform: translateY(-8px);
+    border-color: #d4af37;
+    box-shadow: 
+        0 8px 40px rgba(212, 175, 55, 0.6),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-selection-card:hover::before,
+.hero-selection-card:hover::after {
+    width: 35px;
+    height: 35px;
+}
+
+.hero-selection-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 3px solid #8b6914;
+    box-shadow:
+        0 0 20px rgba(212, 175, 55, 0.4),
+        inset 0 0 10px rgba(0, 0, 0, 0.5);
+    filter: sepia(0.2) contrast(1.1);
+}
+
+.hero-selection-info {
+    text-align: center;
+}
+
+.hero-selection-info h3 {
+    color: #d4af37;
+    font-size: 1.8em;
+    margin: 15px 0;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+    font-family: 'Pirata One', 'Georgia', serif;
+}
+
+.hero-class {
+    display: inline-block;
+    background: linear-gradient(145deg, #8b6914 0%, #6b5110 100%);
+    color: #ffd700;
+    font-size: 1em;
+    padding: 6px 15px;
+    margin: 8px 0;
+    font-style: italic;
+    border: 2px solid #d4af37;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-level {
+    color: #ffd700;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 15px 0;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+.hero-stats-mini {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 15px;
+    background: linear-gradient(145deg, #3a2f2a 0%, #2a1f1a 100%);
+    border: 2px solid #8b6914;
+    border-radius: 3px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.hero-stats-mini span {
+    color: #c9a961;
+    font-size: 0.95em;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.select-hero-btn {
+    background: linear-gradient(145deg, #8b6914 0%, #6b5110 100%);
+    color: #ffd700;
+    border: 2px solid #d4af37;
+    padding: 14px 28px;
+    border-radius: 3px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Pirata One', 'Georgia', serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.select-hero-btn:hover {
+    background: linear-gradient(145deg, #d4af37 0%, #8b6914 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+.no-heroes {
+    text-align: center;
+    padding: 60px 30px;
+    background: linear-gradient(145deg, #2a1f1a 0%, #1f1612 100%);
+    border: 3px solid #8b6914;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.no-heroes::before,
+.no-heroes::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #d4af37;
+}
+
+.no-heroes::before {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.no-heroes::after {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+}
+
+.no-heroes p {
+    color: #c9a961;
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    font-family: 'Pirata One', 'Georgia', serif;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.create-hero-btn {
+    background: linear-gradient(145deg, #8b6914 0%, #6b5110 100%);
+    color: #ffd700;
+    border: 2px solid #d4af37;
+    padding: 16px 35px;
+    border-radius: 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Pirata One', 'Georgia', serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.create-hero-btn:hover {
+    background: linear-gradient(145deg, #d4af37 0%, #8b6914 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+}
+
+.error-message {
+    text-align: center;
+    padding: 40px 30px;
+    color: #ff6b6b;
+    background: linear-gradient(145deg, #2a1f1a 0%, #1f1612 100%);
+    border: 3px solid #8b0000;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 
+        0 0 30px rgba(255, 107, 107, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    font-size: 1.2em;
+    font-family: 'Pirata One', 'Georgia', serif;
+    letter-spacing: 1px;
+}
+
+.select-hero-link {
+    background: linear-gradient(145deg, #8b6914 0%, #6b5110 100%);
+    color: #ffd700;
+    border: 2px solid #d4af37;
+    padding: 12px 25px;
+    border-radius: 3px;
+    font-size: 1.05em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Pirata One', 'Georgia', serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+}
+
+.select-hero-link:hover {
+    background: linear-gradient(145deg, #d4af37 0%, #8b6914 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+.change-hero-container {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #8b6914;
+}
+
+.change-hero-btn {
+    background: linear-gradient(145deg, #8b1414 0%, #6b1010 100%);
+    color: #ffcccc;
+    border: 2px solid #d43737;
+    padding: 12px 24px;
+    border-radius: 3px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Pirata One', 'Georgia', serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.change-hero-btn:hover {
+    background: linear-gradient(145deg, #d43737 0%, #8b1414 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 55, 55, 0.5);
+}
+
+.loader {
+    border: 5px solid #2a1f1a;
+    border-top: 5px solid #d4af37;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.current-hero {
+    border: 3px solid #C4975E !important;
+    box-shadow: 0 0 20px rgba(196, 151, 94, 0.5);
+}
+
+.current-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #C4975E;
+    color: #1A1A1A;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-family: 'Pirata One', cursive;
+    font-size: 0.9em;
+    z-index: 10;
+}
+
+/* ⭐ BOUTON DE FERMETURE UNIFIÉ */
+.close-modal,
+.close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: linear-gradient(145deg, #8b1414 0%, #6b1010 100%);
+    color: #ffcccc;
+    border: 2px solid #d43737;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.6em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    line-height: 1;
+    font-family: 'Pirata One', 'Georgia', serif;
+}
+
+.close-modal:hover,
+.close:hover {
+    background: linear-gradient(145deg, #d43737 0%, #8b1414 100%);
+    box-shadow: 0 6px 20px rgba(212, 55, 55, 0.6);
+}
+
+@media (max-width: 768px) {
+    .heroes-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .hero-selection-card {
+        max-width: 100%;
+    }
+
+    .hero-selection-info h3 {
+        font-size: 1.5em;
+    }
+
+    .hero-stats-mini {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .no-heroes p {
+        font-size: 1.1em;
+    }
+    
+    .close-modal,
+    .close {
+        top: -10px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-selection-image {
+        height: 180px;
+    }
+
+    .select-hero-btn,
+    .create-hero-btn {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
+    
+    .close-modal,
+    .close {
+        top: -8px;
+        right: -8px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.2em;
+    }
+}
