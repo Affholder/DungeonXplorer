@@ -1,0 +1,209 @@
+.loot-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.loot-popup {
+    background: linear-gradient(145deg, #2a1f1a 0%, #1f1612 100%);
+    border: 4px solid #d4af37;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 
+        0 0 50px rgba(212, 175, 55, 0.6),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.3) rotate(-10deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05) rotate(2deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+}
+
+.loot-popup::before,
+.loot-popup::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #ffd700;
+}
+
+.loot-popup::before {
+    top: 15px;
+    left: 15px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.loot-popup::after {
+    bottom: 15px;
+    right: 15px;
+    border-left: none;
+    border-top: none;
+}
+
+.loot-title {
+    font-family: 'Pirata One', serif;
+    font-size: 2.5em;
+    color: #ffd700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.8),
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px rgba(255, 215, 0, 0.8),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    50% {
+        text-shadow: 
+            0 0 20px rgba(255, 215, 0, 1),
+            0 0 30px rgba(255, 215, 0, 0.6),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+}
+
+.loot-icon {
+    font-size: 4em;
+    margin: 20px 0;
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.loot-message {
+    font-family: 'Pirata One', serif;
+    font-size: 1.3em;
+    color: #c9a961;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.loot-item-name {
+    color: #ffd700;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    margin: 10px 0;
+}
+
+.loot-close-btn {
+    background: linear-gradient(145deg, #8b6914 0%, #6b5110 100%);
+    color: #ffd700;
+    border: 2px solid #d4af37;
+    padding: 15px 40px;
+    font-family: 'Pirata One', serif;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.loot-close-btn:hover {
+    background: linear-gradient(145deg, #d4af37 0%, #8b6914 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+}
+
+.loot-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ffd700;
+    border-radius: 50%;
+    animation: particle-float 3s ease-out forwards;
+}
+
+@keyframes particle-float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-200px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .loot-popup {
+        max-width: 90%;
+        padding: 30px 20px;
+    }
+    
+    .loot-title {
+        font-size: 2em;
+    }
+    
+    .loot-icon {
+        font-size: 3em;
+    }
+    
+    .loot-message {
+        font-size: 1.1em;
+    }
+    
+    .loot-close-btn {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+}
+
+.loot-item-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+    animation: bounce 1s ease infinite, rotate 3s linear infinite;
+}
