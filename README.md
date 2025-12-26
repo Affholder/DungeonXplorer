@@ -52,6 +52,7 @@ L'immersion visuelle respecte les codes de la Dark Fantasy et du Cyberpunk :
 * Système de sauvegarde pour **Démarrer** ou **Reprendre** une aventure.
 
 ### Interface Administrateur
+Connectez-vous en tant qu'Administrateur avec les login '**quentin**' et le mot de passe '**quentin**'
 * Gestion complète (**CRUD**) des contenus : chapitres, monstres, trésors et images.
 * Modération et suppression des comptes joueurs.
 
@@ -59,7 +60,7 @@ L'immersion visuelle respecte les codes de la Dark Fantasy et du Cyberpunk :
 
 ## 📂 Installation
 1. **Clonez** le repository distant.
-2. **Importez** le fichier `BDD.sql` dans votre environnement MySQL.
+2. **Importez** le fichier `dx06_bd.sql` dans votre environnement MySQL.
 3. **Configurez** vos accès base de données dans le fichier de connexion PDO.
 4. **Lancez** l'application via un serveur local (WAMP/MAMP/XAMPP).
 
