@@ -43,7 +43,7 @@ require_once("header.php");
         <h1>Chapitre <?= htmlspecialchars($chapter['id'] ?? '?') ?></h1>
 
         <?php if (!empty($chapter['image'])): ?>
-            <img src="/DungeonXplorer/public/images/<?= htmlspecialchars($chapter['image']) ?>" 
+            <img src="<?= htmlspecialchars($chapter['image']) ?>" 
                  alt="Illustration du chapitre" 
                  class="chapter-img"
                  onerror="this.style.display='none';">
